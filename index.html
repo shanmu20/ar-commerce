@@ -1,54 +1,40 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        <script src="js/aframe.min.js"></script>
+        <script src="js/aframe-ar.js"></script>
+		<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            var _this = this
-            var domElement = document.createElement('video');
-            domElement.setAttribute('autoplay', '');
-            domElement.setAttribute('muted', '');
-            domElement.setAttribute('playsinline', '');
-            domElement.style.width = '1280px'
-            domElement.style.height = '720px'
-            if (navigator.mediaDevices === undefined 
-                    || navigator.mediaDevices.enumerateDevices === undefined 
-                    || navigator.mediaDevices.getUserMedia === undefined  ){
-                alert("WebRTC issue! navigator.mediaDevices.enumerateDevices not present in your browser");		
-            }
-
-            navigator.mediaDevices.enumerateDevices().then(function(devices) {
-                        var userMediaConstraints = {
-                    audio: false,
-                    video: {
-                        facingMode: 'environment',
-                       width: 1280, height: 720
-                    }
-                        }
-                navigator.mediaDevices.getUserMedia(userMediaConstraints).then(function success(stream) {
-                    // set the .src of the domElement
-                    domElement.srcObject = stream;
-                    // to start the video, when it is possible to start it only on userevent. like in android
-                    document.body.addEventListener('click', function(){
-                        domElement.play();
-                    })
-                    $('body').append(domElement);
-
-                }).catch(function(error) {
-                    console.log("Can't access user media", error);
-                    alert("Can't access user media :()");
-                });
-            }).catch(function(err) {
-                console.log(err.name + ": " + err.message);
-            });
-        
-            
-        </script>
+        <script src="js/hammer.min.js"></script>
     </head>
 <body style='margin : 0px; overflow: hidden;'>
-    
-	
+	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+		
+		<!-- define 3d models as assets -->
+        <a-assets>
+		  
+		  <a-asset-item id="battleship-obj" src="models/battleship/anim-girl-battleship.obj"></a-asset-item>
+		  <a-asset-item id="battleship-mtl" src="models/battleship/anim-girl-battleship.mtl"></a-asset-item>
+		  
+		  
+          <!--<audio id="battleaudio" crossorigin autoplay  src="models/battleship/audio.wav"></audio>-->
+
+        </a-assets>
+        <!-- asset declaration ends up here -->
+		
+
+		
+		<!-- handle battleship marker -->
+		<a-marker preset='area'> 
+			<a-entity class="asset-entity" id="battleship" obj-model="obj: #battleship-obj; mtl: #battleship-mtl" scale="0.5 0.5 0.5" position='0 0 0' material='opacity: 0.5;'></a-entity>
+			  <!--<a-sound src="#battleaudiox"></a-sound>-->
+		</a-marker>
+				
+		<!-- add a camera entity to scene rendering -->
+		<a-entity camera></a-entity>
+	</a-scene>
 </body> 
+  <script src="js/custom.js"></script>
 </html>
