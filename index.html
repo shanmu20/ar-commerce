@@ -2,9 +2,7 @@
 <html>
     <head>
         <script src="js/aframe.min.js"></script>
-        <script src="js/aframe-ar.js"></script>
-		 
- <script src="https://unpkg.com/aframe-animation-component/dist/aframe-animation-component.min.js"></script>
+       <script src="js/aframe-ar.js"></script> 
 		<script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -12,49 +10,32 @@
         <script src="js/hammer.min.js"></script>
     </head>
 <body style='margin : 0px; overflow: hidden;'>
+	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+        <a-assets>
+		  
+		  <a-asset-item id="battleship-obj" src="models/battleship/anim-girl-battleship.obj"></a-asset-item>
+		  <a-asset-item id="battleship-mtl" src="models/battleship/anim-girl-battleship.mtl"></a-asset-item>
+        </a-assets>
+        
+		
+		
 
-  <a-scene>
-      <a-assets>
-            <img id="city" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg" data-position="0 0 0" alt="Table de conférence">
-      </a-assets>
-      
-      
-      <a-sky src="#city" rotation="0 0 0"></a-sky> 
-      <a-circle position="-8 -5 2" 
-                rotation="90 0 0"
-                geometry="radius: 1;"                
-                material="side: double;" 
-                >
-                </a-circle>
-      <a-entity id="camera-container" rotation="0 100 0">
-           
-        <a-entity id="camera" look-controls camera="fov: 80; userHeight: 0" wasd-controls="enabled: false;"
-        >
-                <a-animation attribute="rotation"
-                    dur="1000"
-                    begin="animation__fuse-complete"
-                    from="-31.2 4 0"
-                    to="2 5.5 0"
-                    ></a-animation>
-              <a-entity id="cursor" cursor="fuse: true; fuseTimeout: 100"
-                  position="0 0 -1"
-                  geometry="primitive: ring; radiusInner: 0.013; radiusOuter: 0.02"
-                  material="color: #000; shader: flat"
-                  
-                  animation__fuse="startEvents: fusing;
-                              property: scale;
-                              dur: 1000;
-                              to: 0.4 0.4 0.4"
-                  animation__fuseed="startEvents: animation__fuse-complete;
-                              property: scale;
-                              dur: 1;
-                              to: 1 1 1"
-                  >
-              </a-entity>
-        </a-entity>
-      </a-entity>
-    </a-scene>
-
+		</a-entity>
+		
+		
+			<a-entity class="asset-entity" id="battleship" obj-model="obj: #battleship-obj; mtl: #battleship-mtl" scale="0.5 0.5 0.5" position='0 0 -1' material='opacity: 0.5;'>
+		<a-entity camera id="camera"></a-entity>
+	</a-scene>
 </body> 
   <script src="js/custom.js"></script>
+  <script type="text/javascript">
+  var cameraEl = document.querySelector('#camera');
+var worldPos = new THREE.Vector3();
+worldPos.setFromMatrixPosition(cameraEl.object3D.matrixWorld);
+console.log(worldPos.x);
+cameraEl.addEventListener('componentchanged', function (evt) {
+  if (evt.detail.name !== 'position') { return; }
+  console.log(evt.detail.newData);
+});
+  </script>
 </html>
