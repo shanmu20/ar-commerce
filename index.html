@@ -2,8 +2,9 @@
 <html>
     <head>
         <script src="js/aframe.min.js"></script>
-       <script src="js/aframe-orbit-controls-component.js"></script> 
+       
        <script src="js/aframe-ar.js"></script> 
+	   <script src="js/aframe-orbit-controls-component.js"></script> 
     </head>
 <body style='margin : 0px; overflow: hidden;'>
 	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
@@ -37,15 +38,4 @@
 		<!--<a-entity camera id="camera" position="0 1 1"></a-entity>-->
 	</a-scene>
 </body> 
-  <script src="js/custom.js"></script>
-  <script type="text/javascript">
-  var cameraEl = document.querySelector('#camera');
-var worldPos = new THREE.Vector3();
-worldPos.setFromMatrixPosition(cameraEl.object3D.matrixWorld);
-console.log(worldPos.x);
-cameraEl.addEventListener('componentchanged', function (evt) {
-  if (evt.detail.name !== 'position') { return; }
-  console.log(evt.detail.newData);
-});
-  </script>
 </html>
