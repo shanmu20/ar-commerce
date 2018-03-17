@@ -3,11 +3,6 @@
     <head>
         <script src="js/aframe.min.js"></script>
        <script src="js/aframe-ar.js"></script> 
-		<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-        <script src="js/hammer.min.js"></script>
     </head>
 <body style='margin : 0px; overflow: hidden;'>
 	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
@@ -16,15 +11,8 @@
 		  <a-asset-item id="battleship-obj" src="models/battleship/anim-girl-battleship.obj"></a-asset-item>
 		  <a-asset-item id="battleship-mtl" src="models/battleship/anim-girl-battleship.mtl"></a-asset-item>
         </a-assets>
-        
-		
-		
-
-		
-		
-		
-			<a-entity class="asset-entity" id="battleship" obj-model="obj: #battleship-obj; mtl: #battleship-mtl" scale="0.5 0.5 0.5" position='0 0 -1' material='opacity: 0.5;'>
-			</a-entity>
+		<a-entity class="asset-entity" id="battleship" obj-model="obj: #battleship-obj; mtl: #battleship-mtl" scale="0.5 0.5 0.5" position='0 0 -1' material='opacity: 0.5;'>
+		</a-entity>
 		<a-entity camera id="camera" position="0 1 1"></a-entity>
 	</a-scene>
 </body> 
