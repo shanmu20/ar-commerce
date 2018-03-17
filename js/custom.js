@@ -3,8 +3,12 @@
             domElement.setAttribute('autoplay', '');
             domElement.setAttribute('muted', '');
             domElement.setAttribute('playsinline', '');
-            domElement.style.width = '1280px'
-            domElement.style.height = '720px'
+            domElement.style.width = '300px'
+            domElement.style.height = '600px'
+			domElement.style.position = 'absolute'
+			domElement.style.top = '0px'
+			domElement.style.left = '0px'
+			domElement.style.zIndex = '-2'
             if (navigator.mediaDevices === undefined 
                     || navigator.mediaDevices.enumerateDevices === undefined 
                     || navigator.mediaDevices.getUserMedia === undefined  ){
