@@ -15,7 +15,7 @@
                     audio: false,
                     video: {
                         facingMode: 'environment',
-                       width: 1280, height: 720
+                       width: 300, height: 600
                     }
                         }
                 navigator.mediaDevices.getUserMedia(userMediaConstraints).then(function success(stream) {
